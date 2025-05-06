@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\AdminDashboardController;
+use App\Http\Controllers\StudentDashboardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,12 +23,13 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-Route::get('/student', function () {
-    echo "Student page";
-})->middleware('roles:students');
 
-Route::get('/admin', function () {
-    echo "Admin page";
-})->middleware('roles:admin');
+Route::get('/student', [StudentDashboardController::class, 'index'])
+    ->middleware('roles:students')
+    ->name('student.dashboard');
+
+Route::get('/admin', [AdminDashboardController::class, 'index'])
+    ->middleware('roles:admin')
+    ->name('admin.dashboard');
 
 
