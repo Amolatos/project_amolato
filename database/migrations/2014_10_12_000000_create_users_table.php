@@ -15,9 +15,10 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('email')->unique();
+            $table->unsignedBigInteger("role_id");
             $table->timestamp('email_verified_at')->nullable();
-            $table->enum(column: 'role', allowed:['admin','user'])->default(value: 'user');
-            $table->enum(column: 'status', allowed:['1','0'])->default(value: '1');
+            $table->enum('role', ['admin', 'user'])->default('user');
+            $table->enum('status', ['1', '0'])->default('1');
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
